@@ -1,5 +1,7 @@
 package com.example.springtemplate.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,8 +14,19 @@ public class User {
     private String lastName;
     private String username;
     private String password;
-    private String profilePicture;
-    private String handle;
+    private String email;
+    private String dateOfBirth;
+
+    @ManyToOne
+    private Team team;
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
 
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
@@ -25,17 +38,17 @@ public class User {
     public void setUsername(String username) { this.username = username; }
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
-    public String getProfilePicture() { return profilePicture; }
-    public void setProfilePicture(String profilePicture) { this.profilePicture = profilePicture; }
-    public String getHandle() { return handle; }
-    public void setHandle(String handle) { this.handle = handle; }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+    public String getDateOfBirth() { return dateOfBirth; }
+    public void setDateOfBirth(String dateOfBirth) { this.dateOfBirth = dateOfBirth; }
 
-    public User(String username, String password, String first_name, String last_name, String profile_picture) {
+    public User(String username, String password, String first_name, String last_name, String date_of_birth) {
         this.username = username;
         this.password = password;
         this.firstName = first_name;
         this.lastName = last_name;
-        this.profilePicture = profile_picture;
+        this.dateOfBirth = date_of_birth;
     }
 
     public User() {}

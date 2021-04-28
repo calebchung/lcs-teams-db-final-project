@@ -1,9 +1,12 @@
 package com.example.springtemplate.daos;
 
+import com.example.springtemplate.models.Game;
+import com.example.springtemplate.models.Team;
 import com.example.springtemplate.models.User;
 import com.example.springtemplate.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -27,7 +30,13 @@ public class UserOrmDao {
             @PathVariable("userId") Integer id) {
         return userRepository.findUserById(id);
     }
-    
+
+    @GetMapping("/api/users/{teamId}/users")
+    public List<User> findUserForTeam(
+        @PathVariable("teamId") Integer teamId) {
+        return userRepository.findUserByTeamId(teamId);
+    }
+
     @PutMapping("/api/users/{userId}")
     public User updateUser(
             @PathVariable("userId") Integer id,
@@ -37,8 +46,8 @@ public class UserOrmDao {
         user.setLastName(userUpdates.getLastName());
         user.setUsername(userUpdates.getUsername());
         user.setPassword(userUpdates.getPassword());
-        user.setProfilePicture(userUpdates.getProfilePicture());
-        user.setHandle(userUpdates.getHandle());
+        user.setEmail(userUpdates.getEmail());
+        user.setDateOfBirth(userUpdates.getDateOfBirth());
         return userRepository.save(user);
     }
     

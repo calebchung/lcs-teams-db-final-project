@@ -1,5 +1,6 @@
 package com.example.springtemplate.repositories;
 
+import com.example.springtemplate.models.Team;
 import com.example.springtemplate.models.User;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -15,4 +16,7 @@ public interface UserRepository
     @Query(value = "SELECT * FROM users WHERE id=:userId",
             nativeQuery = true)
     public User findUserById(@Param("userId") Integer id);
+    @Query(value = "SELECT * FROM users WHERE team_id=:teamId",
+        nativeQuery = true)
+    public List<User> findUserByTeamId(@Param("teamId") Integer id);
 }
